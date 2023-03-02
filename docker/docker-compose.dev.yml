@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: ../
+      dockerfile: docker/backend/Dockerfile
+      target: base
+    volumes:
+      - ../backend:/app
+      - exclude:/app/node_modules
+    container_name: bibliochouette_api
+    networks:
+      - backend
+    depends_on:
+      - db
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:alpine
+    container_name: bibliochouette_db
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - backend
+
+
+networks:
+  backend:
+
+volumes:
+  exclude:
+  db:
