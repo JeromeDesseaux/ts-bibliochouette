@@ -20,7 +20,7 @@ export const initDb = () => {
       logger.info('Data Source has been initialized.');
     })
     .catch((err) => {
-      logger.fatal('Error during Data Source initialization', err);
+      logger.fatal(`Error during database initialization : ${err.message}`);
       process.exit(0);
     });
 };
