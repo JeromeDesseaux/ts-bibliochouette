@@ -1,14 +1,8 @@
-import { singleton } from "tsyringe";
+import { singleton } from 'tsyringe';
 
 @singleton()
 export class DemoRepository {
-    findAll() {
-        return [
-            "toto",
-            "tata",
-            "titi",
-            "tutu",
-            "tete"
-        ]
-    }
-} 
+  findAll() {
+    return ['toto', 'tata', 'titi', 'tutu', 'tete'];
+  }
+}

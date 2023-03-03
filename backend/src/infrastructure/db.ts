@@ -7,7 +7,8 @@ const AppDataSource = new DataSource({
   username: 'bibliochouette',
   password: 'password',
   database: 'bibliochouette',
-  entities: ['src/entity/*.ts'],
+  entities: ['src/entities/**/*.model.ts'],
+  migrations: ['src/infrastructure/migrations/**/*.ts'],
   logging: true,
   synchronize: true,
 });
@@ -22,3 +23,5 @@ export const initDb = () => {
       process.exit(0);
     });
 };
+
+export default AppDataSource;
