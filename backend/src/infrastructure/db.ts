@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { logger } from './logging';
 
 const AppDataSource = new DataSource({
   type: 'postgres',
@@ -9,17 +10,17 @@ const AppDataSource = new DataSource({
   database: 'bibliochouette',
   entities: ['src/entities/**/*.model.ts'],
   migrations: ['src/infrastructure/migrations/**/*.ts'],
-  logging: true,
+  logging: false,
   synchronize: true,
 });
 
 export const initDb = () => {
   AppDataSource.initialize()
     .then(() => {
-      console.log('Data Source has been initialized!');
+      logger.info('Data Source has been initialized.');
     })
     .catch((err) => {
-      console.error('Error during Data Source initialization', err);
+      logger.fatal('Error during Data Source initialization', err);
       process.exit(0);
     });
 };
